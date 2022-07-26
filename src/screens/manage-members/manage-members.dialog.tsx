@@ -1,7 +1,9 @@
 import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
 
 import ContactModel from "../../models/contact.model";
+import EditContactForm from "./forms/edit-contact.form";
+
+import "./forms/form.styles.css";
 
 interface Props {
 	member: ContactModel;
@@ -19,33 +21,14 @@ const ManageMemberDialog = ({ member, visible, setVisible }: Props) => {
 	return (
 		<Dialog
 			visible={visible}
+			header="Manage Member"
 			footer={footer}
-			modal
 			onHide={onHide}
 			position="right"
-			style={{ width: "40vw", height: "90vh" }}
+			modal
+			style={{ width: "550px", height: "90vh" }}
 		>
-			<h3>{`${member.first_name} ${member.last_name}`}</h3>
-			<p>{member.contact_id}</p>
-
-			<div className="s-1" />
-
-			<p>Email:</p>
-			<p>UH ID:</p>
-			<p>Phone Number:</p>
-
-			<div className="s-2" />
-
-			<h4>Membership Information</h4>
-
-			<div className="s-1" />
-
-			<p>Status:</p>
-			<p>Start Date:</p>
-			<p>End Date:</p>
-			<p>Grant Reason:</p>
-
-			<Button label="Update Membership" />
+			<EditContactForm member={member} />
 		</Dialog>
 	);
 };

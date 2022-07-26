@@ -3,6 +3,14 @@ main {
     margin: 50px 100px;
 }
 
+.flex {
+    display: flex;
+}
+
+.p-toolbar {
+    padding: 10px !important;
+}
+
 .s-1 {
     padding: 0.25rem;
 }
@@ -11,6 +19,6 @@ main {
     padding: 0.5rem;
 }
 
-.p-toolbar {
-    padding: 10px !important;
+.s-3 {
+    padding: 1rem;
 }

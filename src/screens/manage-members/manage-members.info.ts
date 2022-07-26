@@ -1,4 +1,7 @@
-import ColumnField from "../../models/table.model";
+import { ColumnField } from "../../models/table.model";
+import { FilterMatchMode } from 'primereact/api';
+import { DataTableFilterMeta } from "primereact/datatable";
+import ContactModel from "../../models/contact.model";
 
 class ManageMembersInfo {
 
@@ -24,6 +27,33 @@ class ManageMembersInfo {
             { field: "phone_number", header: "Phone Number" },
             { field: "shirt_size_id", header: "Shirt Size" },
         ];
+    }
+
+    static getShirtSizeOptions() {
+        return [
+            { label: "Extra Small", value: "xs" },
+            { label: "Small", value: "sm" },
+            { label: "Medium", value: "md" },
+            { label: "Large", value: "lg" },
+            { label: "Extra Large", value: "xl" },
+            { label: "Double Extra Large", value: "xxl" },
+            { label: "Triple Extra Large", value: "xxxl" },
+        ]
+    }
+
+    static getTableFilters(): DataTableFilterMeta {
+        return { global: { value: null, matchMode: FilterMatchMode.CONTAINS } };
+    }
+
+    static getGlobalFilterFields(): string[] {
+        return [
+            "first_name",
+            "last_name",
+            "uh_id",
+            "email",
+            "phone_number",
+            "shirt_size_id",
+        ]
     }
 
 }

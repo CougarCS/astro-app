@@ -26,18 +26,24 @@ const ManageMembers = () => {
 		getData();
 	}, []);
 
-	const manageOnClick = () => {
+	const onAddClick = () => {
+		console.log("Add clicked!");
+	};
+
+	const onManageClick = () => {
 		setMemberDialogVisible(true);
 	};
 
 	const toolbarLeft = (
 		<>
+			<Button label="Add" icon="pi pi-plus" onClick={onAddClick} />
+			<div className="s-1" />
 			<Button
 				label="Manage"
 				icon="pi pi-cog"
-				className="p-button-sm"
 				disabled={!selected}
-				onClick={manageOnClick}
+				className="p-button-secondary"
+				onClick={onManageClick}
 			/>
 		</>
 	);
@@ -55,8 +61,8 @@ const ManageMembers = () => {
 
 	return (
 		<main>
-			<h1>Manage Members</h1>
-			<p>Create, modify, delete and manage membership</p>
+			<h1>Members</h1>
+			<p>Create and manage members</p>
 
 			<Toolbar left={toolbarLeft} />
 
@@ -68,6 +74,9 @@ const ManageMembers = () => {
 				defaultColumns={ManageMembersInfo.getDefaultColumns()}
 				selected={selected}
 				setSelected={setSelected}
+				filters={ManageMembersInfo.getTableFilters()}
+				globalFilterFields={ManageMembersInfo.getGlobalFilterFields()}
+				height="450px"
 			/>
 
 			{renderMemberDialog()}

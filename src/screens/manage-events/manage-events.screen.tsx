@@ -1,13 +1,14 @@
 import { useState } from "react";
 
-import BasicTable from "../../../components/basic-table";
+import ColumnField from "../../models/table.model";
+import BasicTable from "../../components/basic-table";
 import ManageEventDialog from "./manage-event.dialog";
-import ColumnField from "../../../models/table.model";
+import EventModel from "../../models/event.model";
 
 const ManageEvents = () => {
-	const events: Event[] = [];
+	const events: EventModel[] = [];
 	const columns: ColumnField[] = [];
-	const [selected, setSelected] = useState<Event | undefined>(undefined);
+	const [selected, setSelected] = useState<EventModel | undefined>(undefined);
 
 	return (
 		<main>

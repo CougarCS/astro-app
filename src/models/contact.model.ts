@@ -5,13 +5,8 @@ interface ContactModel {
 	first_name: string;
 	last_name: string;
 	phone_number: string;
-	shirt_size: string;
+	shirt_size_id: string;
 	timestamp: string;
-	membership_id: string;
-	membership_status: string;
-	membership_start_date: string;
-	membership_end_date: string;
-	member_points: number;
 }
 
 export default ContactModel;

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./app";
 import Dashboard from "./screens/dashboard/dashboard.screen";
 import ManageMembers from "./screens/manage-members/manage-members.screen";
-import ManageEvents from "./screens/dashboard/manage-events/manage-events.screen";
+import ManageEvents from "./screens/manage-events/manage-events.screen";
 
 const AppRouter = () => {
 	return (

@@ -1,0 +1,24 @@
+.form-container {
+    width: 400px;
+}
+
+.label-input-h {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.label-input-h > label {
+    display: block;
+    margin-right: 1rem;
+}
+
+.label-input-h > input {
+    width: 200px;
+}
+
+.label-input-h > .p-dropdown {
+    width: 150px;
+}
