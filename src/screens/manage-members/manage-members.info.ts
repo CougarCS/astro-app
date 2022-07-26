@@ -31,6 +31,7 @@ class ManageMembersInfo {
 
     static getShirtSizeOptions() {
         return [
+            { label: "Not Available", value: undefined },
             { label: "Extra Small", value: "xs" },
             { label: "Small", value: "sm" },
             { label: "Medium", value: "md" },
