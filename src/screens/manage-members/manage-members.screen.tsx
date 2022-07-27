@@ -13,7 +13,7 @@ import { fetcher } from "../../utils/fetcher";
 import { API_BASE_URL } from "../../utils/config";
 
 const ManageMembers = () => {
-	const { data: members, error } = useSWR<ContactModel[], unknown>(`${API_BASE_URL}/member/all`, fetcher);
+	const { data: members, error } = useSWR<ContactModel[], Error>(`${API_BASE_URL}/member/all`, fetcher);
 	const [selected, setSelected] = useState<MemberModel | undefined>(undefined);
 
 	const [memberDialogVisible, setMemberDialogVisible] =
