@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import BasicTable from "../../components/basic-table";
 import { Toolbar } from "primereact/toolbar";
