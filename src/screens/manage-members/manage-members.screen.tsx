@@ -7,24 +7,20 @@ import { Button } from "primereact/button";
 import ManageMemberDialog from "./manage-members.dialog";
 import ContactModel from "../../models/contact.model";
 import MemberModel from "../../models/contact.model";
-import MemberService from "../../services/MemberService";
 import ManageMembersInfo from "./manage-members.info";
+import useSWR from "swr";
+import { fetcher } from "../../utils/fetcher";
+import { API_BASE_URL } from "../../utils/config";
 
 const ManageMembers = () => {
-	const [members, setMembers] = useState<ContactModel[]>([]);
+	const { data: members, error } = useSWR<ContactModel[], unknown>(`${API_BASE_URL}/member/all`, fetcher);
 	const [selected, setSelected] = useState<MemberModel | undefined>(undefined);
 
 	const [memberDialogVisible, setMemberDialogVisible] =
 		useState<boolean>(false);
 
-	useEffect(() => {
-		const getData = async () => {
-			const data = await MemberService.getMembers();
-			setMembers(data);
-		};
-
-		getData();
-	}, []);
+	if (error) return <p> Error fetching...</p>;
+	if (!members) return <div> loading...</div>;
 
 	const onAddClick = () => {
 		console.log("Add clicked!");
