@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Toolbar } from "primereact/toolbar";
-import { DataTable, DataTableFilterMeta } from "primereact/datatable";
+import { DataTable, DataTableFilterMeta, DataTableFilterMetaData } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -11,22 +11,33 @@ import ContactModel from "../../models/contact.model";
 import MemberModel from "../../models/contact.model";
 import ManageMembersInfo from "./manage-members.info";
 import { fetcher } from "../../utils/fetcher";
+import { ColumnField } from "../../models/table.model";
+import { MultiSelect, MultiSelectChangeParams } from "primereact/multiselect";
 
 const ManageMembers = () => {
+
 	const { data: members, error } = useSWR<ContactModel[], Error>(
 		`${API_BASE_URL}/member/all`,
 		fetcher
 	);
+
 	const [selected, setSelected] = useState<MemberModel | undefined>(undefined);
-	const [filters, setFilters] = useState<DataTableFilterMeta>(
-		ManageMembersInfo.getTableFilters()
-	);
+	const [filters, setFilters] = useState<DataTableFilterMeta>(ManageMembersInfo.getTableFilters());
 	const [globalFilterValue, setGlobalFilterValue] = useState("");
-	const [memberDialogVisible, setMemberDialogVisible] =
-		useState<boolean>(false);
+	const [memberDialogVisible, setMemberDialogVisible] = useState<boolean>(false);
+	const [selectedColumns, setSelectedColumns] = useState<ColumnField[]>(ManageMembersInfo.getDefaultColumns() ?? ManageMembersInfo.getColumns());
 
 	const onAddClick = () => {
 		console.log("Add clicked!");
+	};
+
+	const onColumnToggle = (event: MultiSelectChangeParams) => {
+		const selectedColumns = event.value as ColumnField[];
+		const orderedSelectedColumns = ManageMembersInfo.getColumns().filter(
+			(col) =>
+				selectedColumns.some((sCol: ColumnField) => sCol.field === col.field)
+		);
+		setSelectedColumns(orderedSelectedColumns);
 	};
 
 	const onManageClick = () => {
@@ -66,7 +77,7 @@ const ManageMembers = () => {
 	const onGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		const _filters = { ...filters };
-		_filters["global"].value = value;
+		(_filters.global as DataTableFilterMetaData).value = value;
 
 		setFilters(_filters);
 		setGlobalFilterValue(value);
@@ -74,7 +85,14 @@ const ManageMembers = () => {
 
 	const renderHeader = () => {
 		return (
-			<div className="flex justify-content-end">
+			<div className="flex justify-content-between">
+				<MultiSelect
+					value={selectedColumns}
+					options={ManageMembersInfo.getColumns()}
+					optionLabel="header"
+					onChange={onColumnToggle}
+					style={{ width: '20em' }}
+				/>
 				<span className="p-input-icon-left">
 					<i className="pi pi-search" />
 					<InputText
@@ -123,7 +141,7 @@ const ManageMembers = () => {
 						selection={selected}
 						onSelectionChange={(e) => setSelected(e.value)}
 					>
-						{ManageMembersInfo.getDefaultColumns().map(({ field, header }) => (
+						{selectedColumns.map(({ field, header }) => (
 							<Column
 								key={field}
 								field={field}

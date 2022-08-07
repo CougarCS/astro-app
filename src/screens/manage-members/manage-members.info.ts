@@ -44,6 +44,8 @@ class ManageMembersInfo {
 	static getTableFilters(): DataTableFilterMeta {
 		return {
 			global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+			contact_id: { value: null, matchMode: FilterMatchMode.CONTAINS },
+			timestamp: { value: null, matchMode: FilterMatchMode.CONTAINS },
 			last_name: { value: null, matchMode: FilterMatchMode.CONTAINS },
 			first_name: { value: null, matchMode: FilterMatchMode.CONTAINS },
 			uh_id: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -60,7 +62,9 @@ class ManageMembersInfo {
 			"uh_id",
 			"email",
 			"phone_number",
-			"shirt_size_id"
+			"shirt_size_id",
+			"contact_id",
+			"timestamp"
 		];
 	}
 }
