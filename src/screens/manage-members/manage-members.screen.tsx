@@ -126,6 +126,7 @@ const ManageMembers = () => {
 						value={members}
 						paginator
 						showGridlines
+						stripedRows
 						responsiveLayout="scroll"
 						paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
 						currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
